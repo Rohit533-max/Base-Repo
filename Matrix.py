@@ -1,12 +1,21 @@
 import numpy as np
 from typing import List
-lis1 = []
+#asking for number rows and columns
 row = int(input("Enter the number of rows: "))
 col = int(input("Enter the number of columns: "))
 
-for i in range(row):
-    row = int(input("Enter row values: "))
-    lis1.append(row)
+#Initializing an empty matrix for storing the values
+matrix = []
 
-ar = np.array(lis1)
-print(ar)
+#Take input row by row
+for i in range(row):
+    row =[]
+    for j in range(col):
+        element = int(input(f"Enter the row{i+1},column{j+1} element: "))
+        row.append(element)
+    matrix.append(row)
+
+#converting the matrix into an array
+arr= np.array(matrix)
+
+print(arr)
