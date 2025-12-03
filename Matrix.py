@@ -8,11 +8,17 @@ def add(a,b):
 def subs(a,b):
     return a - b
 def dot(a,b):
-    return a.b
+    return a*b
 def inverse(a,b):
-    return #Logic is pending...
+    det = np.linalg.det(matrix)
+    if det == 0:
+        print("Matrix is not invertible determinant is 0")
+    else:
+        return np.linalg.det(matrix)
+#The linalg is a in-built function in numpy, it contains functions of matrix like inverse, determinant, eigenvalues.
 def deter(a,b):
-    return #logic pending...
+    det = np.linalg.det(matrix)
+
 
 root = tk.Tk()
 root.mainloop()
