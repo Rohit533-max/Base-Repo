@@ -2,14 +2,15 @@
 
 from tkinter import *
 from tkinter import ttk
+import os
 
 #bringing weather api to get real-time data
 
 #requests is a inbuild function that manages to run the url or api's in python
 import requests
-
+Token = os.environ.get('key')
 city_name = "himachal pradesh"
-data = requests.get("https://api.openweathermap.org/data/2.5/weather?q="+ city_name+"&appid=729749090ab85fd365c779cc7443a766").json()
+data = requests.get("https://api.openweathermap.org/data/2.5/weather?q="+ city_name,Token).json()
 #+ city_name+ to setup the custom city name
 #In api data gets in the form of JSON and XML format....
 #in JSON data inherit in the dictionary or list form
