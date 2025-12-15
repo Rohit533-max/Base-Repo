@@ -3,17 +3,20 @@
 from tkinter import *
 from tkinter import ttk
 import os
+from dotenv import load_dotenv
 
 #bringing weather api to get real-time data
 
 #requests is a inbuild function that manages to run the url or api's in python
 import requests
-Token = os.environ.get('key')
+
+load_dotenv()
+api_key = os.getenv("API_KEY")
 
 
 def data_get():
     city = city_name.get()
-    data = requests.get("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=729749090ab85fd365c779cc7443a766").json()
+    data = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}").json()
 #+ city_name+ to setup the custom city name
 #In api data gets in the form of JSON and XML format....
 #in JSON data inherit in the dictionary or list form
@@ -22,11 +25,18 @@ def data_get():
     temp1.config(text=str(int(data["main"]["temp"]-273.15)))
     pre1.config(text=data["main"]["pressure"])
 
+    if data.get("cod") != 200:
+        w_label1.config(text="Error")
+        wd_label1.config(text=data.get("message", "No data"))
+        temp1.config(text="")
+        pre1.config(text="")
+        return
 
-
-
-
-
+    # Safe to access weather keys now
+    w_label1.config(text=data["weather"][0]["main"])
+    wd_label1.config(text=data["weather"][0]["description"])
+    temp1.config(text=str(int(data["main"]["temp"] - 273.15)))
+    pre1.config(text=data["main"]["pressure"])
 
 
 
