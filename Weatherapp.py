@@ -9,13 +9,19 @@ import os
 #requests is a inbuild function that manages to run the url or api's in python
 import requests
 Token = os.environ.get('key')
-city_name = "himachal pradesh"
-data = requests.get("https://api.openweathermap.org/data/2.5/weather?q="+ city_name,Token).json()
+
+
+def data_get():
+    city = city_name.get()
+    data = requests.get("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=729749090ab85fd365c779cc7443a766").json()
 #+ city_name+ to setup the custom city name
 #In api data gets in the form of JSON and XML format....
 #in JSON data inherit in the dictionary or list form
+    w_label1.config(text=data["weather"][0]["main"])
+    wd_label1.config(text=data["weather"][0]["description"])
+    temp1.config(text=str(int(data["main"]["temp"]-273.15)))
+    pre1.config(text=data["main"]["pressure"])
 
-print(data)
 
 
 
@@ -28,13 +34,13 @@ print(data)
 root = Tk()
 
 root.title("weather App")
-root.geometry("600x600")
+root.geometry("500x600")
 
 root.config(bg="blue")
 
 #creating a label for the heading of the app 
 name_label = Label(root, text = "WEATHER APP", font=("Time New Roman", 16, "italic", "bold"))
-name_label.place(x=100,y=100, height=60, width=420)
+name_label.place(x=100,y=100, height=40, width=350)
 
 #creating a combo box
 list_name = [
@@ -67,35 +73,42 @@ list_name = [
     "Uttarakhand",
     "West Bengal"
 ]
+city_name = StringVar()
 #values in combobox is a build in func that stores the values that are gonna repersent in the options
-com = ttk.Combobox(root,text = "", font=("Time New Roman", 12, "italic"), values= list_name)
-com.place(x=200,y=190, width =250, height = 30)
-
-#submit button
-sub_button = Button(root, text = "Submit", font=("Arial", 10))
-sub_button.place(x=300, y=250)
-
+com = ttk.Combobox(root,text = "", font=("Time New Roman", 12, "italic"), values= list_name, textvariable=city_name)
+com.place(x=150,y=190, width =220, height = 30)
 
 #Weather label
 
 #creating the mirroring labels to show the data after fetching
 
-w_label = Label(root, text="Weather Update", font=("Time New Roman", 20, "bold", "italic"))
-w_label.place(x=120, y= 300)
+w_label = Label(root, text="Weather Climate", font=("Time New Roman",12, "italic"))
+w_label.place(x=120, y= 270, width=150)
+
+w_label1 = Label(root, text="", font=("Time New Roman",12, "italic"))
+w_label1.place(x=320, y= 270,width=150)
 
 wd_label = Label(root, text = "Weather Description", font = ("Time New Roman", 10))
-wd_label.place(x=120, y=350)
+wd_label.place(x=120, y=320,width=150)
+
+wd_label1 = Label(root, text = "", font = ("Time New Roman", 10))
+wd_label1.place(x=320, y=320,width=150)
 
 temp = Label(root, text = "Temperature: ", font = ("Time New Roman", 10))
-temp.place(x=120, y=400)
+temp.place(x=120, y=370,width=150)
 
-temp1 = Label(root, text = "T", font = ("Time New Roman", 10))
-temp1.place(x=240, y=400, width= 250)
+temp1 = Label(root, text = "", font = ("Time New Roman", 10))
+temp1.place(x=320, y=370, width= 150)
 
 pre = Label(root, text = "Pressure: ", font = ("Time New Roman", 10))
-pre.place(x=120, y=450)
+pre.place(x=120, y=420,width=150)
 
-pre1= Label(root, text = "P", font = ("Time New Roman", 10))
-pre1.place(x=240, y=450, width=250)
+pre1= Label(root, text = "", font = ("Time New Roman", 10))
+pre1.place(x=320, y=420, width=150)
+
+
+#submit button
+sub_button = Button(root, text = "Submit", font=("Arial", 10), command=data_get)
+sub_button.place(x=270, y=460)
 
 root.mainloop()
