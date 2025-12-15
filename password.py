@@ -18,3 +18,4 @@ if __name__ == "__main__":
     
     random.shuffle(s) # to shuffle the list s
     print("".join (s[0:passlen]))
+
