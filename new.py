@@ -1,8 +1,8 @@
 for i in range(0,15):
     print(i)
 
-<<<<<<< HEAD
-print("branch code")
-=======
+print("feature branch")
+
+
+
 print("main branch")
->>>>>>> main
