@@ -7,3 +7,6 @@ print("feature branch")
 
 
 print("main branch")
+
+def add(a,b):
+    return a+b
