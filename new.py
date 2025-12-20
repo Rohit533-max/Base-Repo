@@ -10,3 +10,5 @@ print("main branch")
 
 def add(a,b):
     return a+b
+
+print("Function to add two numbers")
