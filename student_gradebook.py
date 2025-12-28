@@ -71,3 +71,4 @@ def add_student(student):
             'Chemistry':c_marks,
             'Computer': com_marks,
         }
+print(df)
